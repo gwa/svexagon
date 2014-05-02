@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SVEXGAGON</title>
+	<style>
+
+		body {
+			margin: 0;
+			background: #333;
+		}
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+
+		li {
+			float: left;
+			width: 20%;
+			margin: 0;
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+			opacity: 0;
+		}
+
+		svg {
+			height: 100%;
+		}
+
+	</style>
+</head>
+<body>
+
+	<ul>
+		<li><img class="svex" src="assets/img/img-1.jpg" /></li>
+		<li><img class="svex" src="assets/img/img-2.jpg" /></li>
+		<li><img class="svex" src="assets/img/img-3.jpg" /></li>
+		<li><img class="svex" src="assets/img/img-4.jpg" /></li>
+		<li><img class="svex" src="assets/img/img-5.jpg" /></li>
+		<li><img class="svex" src="assets/img/img-6.jpg" /></li>
+		<li><img class="svex" src="assets/img/img-7.png" /></li>
+	</ul>
+
+	<script src="../bower_components/jquery/dist/jquery.js"></script>
+	<script src="../src/gwa.NPolygon.js"></script>
+	<script src="../src/gwa.Svexagon.js"></script>
+	<script>
+	$('.svex').each(function() {
+		new gwa.Svexagon($(this));
+	});
+	</script>
+
+</body>
+</html>

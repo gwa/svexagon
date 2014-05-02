@@ -1,0 +1,20 @@
+{
+  "name": "svexagon",
+  "version": "0.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gwa/svexagon.git"
+  },
+  "author": "Timothy Groves <groves@greatwhiteark.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gwa/svexagon/issues"
+  },
+  "homepage": "https://github.com/gwa/svexagon",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-jscs": "^0.1.7"
+  }
+}
