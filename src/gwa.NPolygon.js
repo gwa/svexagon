@@ -3,10 +3,18 @@ window.gwa = window.gwa || {};
 /**
  * @class NPolygon
  * @namespace  gwa
- * @constructor
  */
 (function( ns ) {
 
+	/**
+	 * @method NPolygon
+	 * @constructor
+	 * @param  {Number} nsides
+	 * @param  {Number} cx
+	 * @param  {Number} cy
+	 * @param  {Number} radius
+	 * @param  {Number} rotation
+	 */
 	ns.NPolygon = function( nsides, cx, cy, radius, rotation ) {
 
 		// declare private variables
@@ -33,12 +41,7 @@ window.gwa = window.gwa || {};
 					theta = typeof rotation !== 'undefined' ? rotation * Math.PI / 180 : 0;
 
 				for (i = 0; i < nsides; i++) {
-					_calculatePoint(points, i, nsides, theta, radius, cx, cy, 0.2 );
-					/*
-					px = radius * Math.cos(2 * Math.PI * i / nsides + theta) + cx;
-					py = radius * Math.sin(2 * Math.PI * i / nsides + theta) + cy;
-					points.push([px, py]);
-					*/
+					_calculatePoint(points, i, nsides, theta, radius, cx, cy, 0.1 );
 				}
 				_points = points;
 				_width = _getWidth(points);

@@ -9,17 +9,69 @@
 			background: #333;
 		}
 
+		.faces {
+			width: 1048px;
+			margin: 100px auto 0;
+		}
+
 		ul {
 			list-style: none;
 			margin: 0;
 			padding: 0;
-			overflow: hidden;
+			height: 294px;
+			/*overflow: hidden;*/
 		}
 
 		li {
 			float: left;
-			width: 20%;
-			margin: 0;
+			position: relative;
+			-webkit-perspective: 400px;
+			-moz-perspective: 400px;
+			-webkit-perspective-origin: 50% 50%;
+			-moz-perspective-origin: 50% 50%;
+			padding: 2px;
+			height: 223px;
+		}
+
+		li.breaker {
+			margin-left: 131px;
+		}
+
+		.container {
+			-webkit-transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+			-webkit-transition: -webkit-transform 1.5s;
+			-moz-transition: -moz-transform 1.5s;
+			width: 258px;
+			height: 294px;
+		}
+
+		li .back {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 258px;
+			height: 294px;
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+		}
+
+		li svg {
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+		}
+
+		li:hover {
+			z-index: 10;
+		}
+
+		li:hover .container {
+			-webkit-transform: rotateY(180deg);
+			-moz-transform: rotateY(180deg);
+			-webkit-transition: all 0.5s;
+			-moz-transition: all 0.5s;
 		}
 
 		img {
@@ -35,23 +87,65 @@
 	</style>
 </head>
 <body>
-
-	<ul>
-		<li><img class="svex" src="assets/img/img-1.jpg" /></li>
-		<li><img class="svex" src="assets/img/img-2.jpg" /></li>
-		<li><img class="svex" src="assets/img/img-3.jpg" /></li>
-		<li><img class="svex" src="assets/img/img-4.jpg" /></li>
-		<li><img class="svex" src="assets/img/img-5.jpg" /></li>
-		<li><img class="svex" src="assets/img/img-6.jpg" /></li>
-		<li><img class="svex" src="assets/img/img-7.png" /></li>
-	</ul>
-
+	<div class="faces">
+		<ul class="row">
+			<li><div class="container"><img class="svex" src="assets/img/img-1.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-2.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-3.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-4.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-5.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-6.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-1.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-1.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-2.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-3.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-4.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-5.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-6.jpg" /><div class="back"></div></div></li>
+			<li><div class="container"><img class="svex" src="assets/img/img-1.jpg" /><div class="back"></div></div></li>
+		</ul>
+	</div>
 	<script src="../bower_components/jquery/dist/jquery.js"></script>
 	<script src="../src/gwa.NPolygon.js"></script>
 	<script src="../src/gwa.Svexagon.js"></script>
 	<script>
+
+	var odd = true,
+		numinrow = 4,
+		breaker = numinrow,
+		i = 0;
+	$('.row li').each(function () {
+		if (breaker == i) {
+			$(this).addClass('breaker');
+			if (odd) {
+				breaker += numinrow - 1 + numinrow;
+				odd = false;
+			} else {
+				breaker += numinrow;
+				odd = true;
+			}
+		}
+		i++;
+	});
+
+
+
 	$('.svex').each(function() {
 		new gwa.Svexagon($(this));
+	});
+	var opp = 259 / 2;
+		hyp = (1 / Math.sin(60 * Math.PI / 180)) * opp;
+
+	$('.back').each(function() {
+		var sv = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+		$(this).prepend(sv);
+		var poly = new gwa.NPolygon(6, 0, 0, hyp, 30);
+		var s = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		s.setAttribute('d', poly.getSVGPath());
+		s.setAttribute('style', 'stroke:none; fill: #fff100;');
+		sv.appendChild(s);
+		var d = s.getBBox();
+		s.setAttribute('transform', 'translate(' + d.width / 2 + ' ' + d.height / 2 + ')');
 	});
 	</script>
 
