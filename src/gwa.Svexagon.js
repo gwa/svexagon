@@ -156,7 +156,7 @@ window.gwa = window.gwa || {};
 			var m = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
 			m.setAttribute('x', 0);
 			m.setAttribute('y', 0);
-			m.setAttribute('id', 'mymask');
+			m.setAttribute('id', 'svm_' + Math.round(Math.random() * 100000));
 			defs.appendChild(m);
 			return m;
 		}
