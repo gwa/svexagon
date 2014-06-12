@@ -1,6 +1,6 @@
 {
   "name": "svexagon",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/gwa/svexagon",
   "authors": [
     "Timothy Groves <groves@greatwhiteark.com>"
@@ -14,6 +14,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.1"
+    "jquery": "~1.11.0"
   }
 }
