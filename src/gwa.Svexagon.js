@@ -47,6 +47,7 @@ window.gwa = window.gwa || {};
 				_handleLoaded(img.src, img.width, img.height);
 			}
 			img.src = _jq.attr('src');
+			_jq.css('visibility', 'hidden');
 		}
 
 		function _handleLoaded( src, w, h ) {
