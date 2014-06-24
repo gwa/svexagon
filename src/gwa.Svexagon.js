@@ -41,20 +41,20 @@ window.gwa = window.gwa || {};
 		_svg;
 
 		function _init() {
-			// get actual dimensions of image
-			var img = new Image();
-			img.onload = function() {
-				_handleLoaded(img.src, img.width, img.height);
-			}
-			img.src = _jq.attr('src');
-			_jq.css('visibility', 'hidden');
-		}
+			var img = new Image(),
+				src = _jq.attr('src');
 
-		function _handleLoaded( src, w, h ) {
 			// create svg and replace image
 			_svg = _createSVG();
 			_jq.replaceWith(_svg);
 
+			img.onload = function() {
+				_handleLoaded(img.src, img.width, img.height);
+			}
+			img.src = src;
+		}
+
+		function _handleLoaded( src, w, h ) {
 			// create:
 			// - a defs element (holds the mask)
 			// - a mask element
@@ -71,12 +71,13 @@ window.gwa = window.gwa || {};
 			path.setAttribute('d', poly.getSVGPath());
 			path.setAttribute('style', 'stroke:none; fill: #ffffff;');
 
-			// add path directly to svg to get dimensions (Firefox)
+			// add path directly to svg to get dimensions (Firefox cannot get BBox of path in `defs`).
 			_svg.appendChild(path);
 			dimensions = path.getBBox();
 
 			// move path to mask element now we have the dimensions
 			mask.appendChild(path);
+
 			// move path to center of SVG
 			// (polygon is centered on 0,0)
 			path.setAttribute('transform', 'translate(' + dimensions.width / 2 + ' ' + dimensions.height / 2 + ')');
@@ -101,7 +102,7 @@ window.gwa = window.gwa || {};
 			i.setAttribute('y', d[1]);
 			i.setAttribute('width', d[2]);
 			i.setAttribute('height', d[3]);
-			i.setAttribute('id', 'theID');
+			i.setAttribute('id', _getPseudoRandomId('_svi'));
 			i.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', src);
 			if (typeof mask !== 'undefined') {
 				i.setAttribute('style', 'mask: url(#' + mask.getAttribute('id') + ');');
@@ -157,9 +158,13 @@ window.gwa = window.gwa || {};
 			var m = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
 			m.setAttribute('x', 0);
 			m.setAttribute('y', 0);
-			m.setAttribute('id', 'svm_' + Math.round(Math.random() * 100000));
+			m.setAttribute('id', _getPseudoRandomId('_svm'));
 			defs.appendChild(m);
 			return m;
+		}
+
+		function _getPseudoRandomId( prefix ) {
+			return prefix + '_' + Math.round(Math.random() * 1000000);
 		}
 
 		_init();

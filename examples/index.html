@@ -46,6 +46,7 @@
 			height: 294px;
 		}
 
+/*
 		li .back {
 			position: absolute;
 			top: 0;
@@ -62,7 +63,6 @@
 			-webkit-backface-visibility: hidden;
 			-moz-backface-visibility: hidden;
 		}
-
 		li:hover {
 			z-index: 10;
 		}
@@ -73,7 +73,7 @@
 			-webkit-transition: all 0.5s;
 			-moz-transition: all 0.5s;
 		}
-
+*/
 		img {
 			max-width: 100%;
 			height: auto;
@@ -133,6 +133,8 @@
 	$('.svex').each(function() {
 		new gwa.Svexagon($(this));
 	});
+
+	/*
 	var opp = 259 / 2;
 		hyp = (1 / Math.sin(60 * Math.PI / 180)) * opp;
 
@@ -147,6 +149,7 @@
 		var d = s.getBBox();
 		s.setAttribute('transform', 'translate(' + d.width / 2 + ' ' + d.height / 2 + ')');
 	});
+*/
 	</script>
 
 </body>
